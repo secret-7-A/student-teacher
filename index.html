@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student-Teacher Appointment System</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" defer>
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+        import { getAuth, initializeAuth } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, addDoc, collection, query, where, getDocs, orderBy, startAt, endAt } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+    </script> 
+    <script type="module" src="script.js"></script>
+    
+</head>
+<body>
+
+    <div class="container" id="container">
+        <h2>Login / Signup</h2>
+        <select id="user-role">
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+            <option value="admin">Admin</option>
+        </select><br>
+
+        <input type="email" id="email" placeholder="Enter Your Email" autocomplete="email" required > <br>
+        <input type="password" id="password"  placeholder="Enter Password" autocomplete="new-password" required ><br>
+
+        <button id="signup-btn">Sign Up</button>
+        <button id="login-btn">Login</button>
+        <p id="error-message" style="color: red;"></p>
+    </div>
+    
+    <div id="student-section" class="dashboard" >
+        <h2>Student Dashboard</h2>
+
+        <h3>Search Teacher</h3>
+        <input type="text" id="searchTeachers" placeholder="Enter teacher name" autocomplete="off">
+        <button id="search-teacher-btn">Search</button>
+        <ul id="teacherResults"></ul>
+
+        <h3>Book Appointment</h3>
+        <input type="email" id="teacheremail" placeholder="Teacher Email" autocomplete="off">
+        <input type="datetime-local" id="appointmentTime">
+        <button id="book-appointment-btn" >Book Appointment</button>
+
+        <h3>Send Message to Teacher</h3>
+        <input type="email" id="messageTeacherEmail" placeholder="Teacher Email" autocomplete="off">
+        <textarea id="messageInput" placeholder="Enter your message"></textarea>
+        <button id="send-message-btn">Send</button>
+
+        <h3>My Appointments</h3>
+        <ul id="appointmentsList"></ul>
+        <button id="student-logout-btn">Logout</button>
+    </div>
+
+    <div id="teacher-section" class="dashboard" >
+        <h2>Teacher Dashboard</h2>
+
+        <h3>Set Availability</h3>
+        <input type="datetime-local" id="availableTime">
+        <button id="set-availability-btn">Set Availability</button>
+        <h3>Appointments</h3>
+        <ul id="pendingAppointments"></ul>
+        <button id="approve-appoinment">Approve</button>
+        <button id="cancel-appointment">Cancel</button>
+
+        <h3>Messages from Students</h3>
+        <ul id="message-List"></ul>
+        <h3>All Appointments</h3>
+        <ul id="all-Appointments-list"></ul>
+        <button id="teacher-logout-btn">Logout</button>
+    </div>
+
+    
+    <div id="admin-section" class="dashborad">
+        <h2>Admin Dashboard</h2>
+
+        <h3>Add Teacher</h3>
+        <input type="text" id="teacherName" placeholder="Name" autocomplete="off">
+        <input type="text" id="teacherDepartment" placeholder="Department" autocomplete="off">
+        <input type="text" id="teacherSubject" placeholder="Subject" autocomplete="off">
+        <input type="email" id="teacherEmail" placeholder="Email" autocomplete="off">
+        <button id="add-teacher-btn">Add Teacher</button>
+        <div id="teacher-list-container">
+        <h3>Teachers List</h3><br>
+        <ul id="teacherList"></uli>
+        </div>
+        <div id="buttons-container">
+        <button id="approve-student-btn" style="display:none";>Approve Student</button>
+        <h3>Approve Students</h3>
+        <ul id="student-list"></ul>
+        <button id="admin-logout-btn">Logout</button>
+        </div>
+    </div>
+
+</body>
+</html>
+
